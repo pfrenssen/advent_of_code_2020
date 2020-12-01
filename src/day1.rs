@@ -17,6 +17,23 @@ fn part1(expenses: &[i32]) -> i32 {
     expense * (2020 - expense)
 }
 
+#[aoc(day1, part2)]
+fn part2(expenses: &[i32]) -> i32 {
+    for i in expenses {
+        let r = 2020 - i;
+        match expenses.iter().try_fold(0i32, |_, e: &i32,| {
+            match expenses.contains(&(r - e)) {
+                true => Err(*e),
+                false => Ok(*e),
+            }
+        }) {
+            Ok(_) => {},
+            Err(j) => return i * j * (2020 - i - j),
+        }
+    }
+    unreachable!()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -24,5 +41,10 @@ mod tests {
     #[test]
     fn part1_example() {
         assert_eq!(part1(&[1721, 979, 366, 299, 675, 1456]), 514579);
+    }
+
+    #[test]
+    fn part2_example() {
+        assert_eq!(part2(&[1721, 979, 366, 299, 675, 1456]), 241861950);
     }
 }
