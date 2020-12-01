@@ -8,12 +8,13 @@ fn parse_input_day1(input: &str) -> Result<Vec<i32>, ParseIntError> {
 
 #[aoc(day1, part1)]
 fn part1(expenses: &[i32]) -> i32 {
-    let expense = expenses.iter().try_fold(0i32, |_, e: &i32,| {
-        match expenses.contains(&(2020 - e)) {
+    let expense = expenses
+        .iter()
+        .try_fold(0i32, |_, e: &i32| match expenses.contains(&(2020 - e)) {
             true => Err(*e),
             false => Ok(*e),
-        }
-    }).unwrap_err();
+        })
+        .unwrap_err();
     expense * (2020 - expense)
 }
 
@@ -21,13 +22,14 @@ fn part1(expenses: &[i32]) -> i32 {
 fn part2(expenses: &[i32]) -> i32 {
     for i in expenses {
         let r = 2020 - i;
-        match expenses.iter().try_fold(0i32, |_, e: &i32,| {
-            match expenses.contains(&(r - e)) {
+        match expenses
+            .iter()
+            .try_fold(0i32, |_, e: &i32| match expenses.contains(&(r - e)) {
                 true => Err(*e),
                 false => Ok(*e),
-            }
-        }) {
-            Ok(_) => {},
+            })
+        {
+            Ok(_) => {}
             Err(j) => return i * j * (2020 - i - j),
         }
     }
