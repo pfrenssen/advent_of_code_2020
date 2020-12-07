@@ -4,19 +4,19 @@ use std::collections::HashMap;
 
 #[aoc_generator(day7)]
 fn parse_input(input: &str) -> HashMap<String, Vec<(u8, String)>> {
+    let r1 = Regex::new(r"^(\w+ \w+) bags contain (.*)\.$").unwrap();
+    let r2 = Regex::new(r"^(\d+) (\w+ \w+)").unwrap();
     input
         .lines()
         .map(|l| {
-            let re = Regex::new(r"^(\w+ \w+) bags contain (.*)\.$").unwrap();
-            let caps = re.captures(l).unwrap();
+            let caps = r1.captures(l).unwrap();
             let key = caps[1].to_string();
             let content: Vec<(u8, String)> = match &caps[2] {
                 "no other bags" => vec![],
                 _ => caps[2]
                     .split(", ")
                     .map(|c| {
-                        let re = Regex::new(r"^(\d+) (\w+ \w+)").unwrap();
-                        let caps = re.captures(c).unwrap();
+                        let caps = r2.captures(c).unwrap();
                         (caps[1].parse::<u8>().unwrap(), caps[2].to_string())
                     })
                     .collect(),
