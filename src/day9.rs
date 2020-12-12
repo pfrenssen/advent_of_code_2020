@@ -1,6 +1,4 @@
 use aoc_runner_derive::{aoc, aoc_generator};
-use regex::Regex;
-use std::collections::HashSet;
 
 #[aoc_generator(day9)]
 fn parse_input(input: &str) -> Vec<usize> {

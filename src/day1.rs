@@ -27,8 +27,7 @@ fn part2(expenses: &[i32]) -> i32 {
             .try_fold(0i32, |_, e: &i32| match expenses.contains(&(r - e)) {
                 true => Err(*e),
                 false => Ok(*e),
-            })
-        {
+            }) {
             Ok(_) => {}
             Err(j) => return i * j * (2020 - i - j),
         }
