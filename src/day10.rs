@@ -49,7 +49,6 @@ mod tests {
 
     #[test]
     fn test_parse_input() {
-        let test_input = get_test_input();
         let expected = vec![16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4];
         assert_eq!(expected, parse_input(get_test_input()[0]));
         let expected = vec![
