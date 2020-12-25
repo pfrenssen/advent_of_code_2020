@@ -1,5 +1,4 @@
 use aoc_runner_derive::{aoc, aoc_generator};
-use std::fs::OpenOptions;
 
 #[aoc_generator(day13, part1)]
 fn parse_input_1(input: &str) -> (usize, Vec<usize>) {
